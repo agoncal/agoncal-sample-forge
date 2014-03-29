@@ -1,8 +1,8 @@
-# Samples - Arquillian
+# Samples - Forge
 
-Several samples about Arquillian : 
+Several samples about Forge :
 
-* 01-wytiwyr : What You Test Is What You Run
+* 01-roaster : Examples about the Roaster API
 
 # Licensing
 
