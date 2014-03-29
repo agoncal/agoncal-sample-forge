@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.agoncal.sample.forge</groupId>
+    <artifactId>furnace</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <name>01 - Furnace</name>
+
+    <parent>
+        <groupId>org.agoncal.sample.forge</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.forge.furnace</groupId>
+            <artifactId>furnace-se</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.forge.addon</groupId>
+            <artifactId>projects-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.forge.addon</groupId>
+            <artifactId>dependencies-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.forge.addon</groupId>
+            <artifactId>parser-java-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.forge.addon</groupId>
+            <artifactId>resources-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>facets-impl</artifactId>
+                    <groupId>org.jboss.forge.addon</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>sampleForgeFurnace</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-help-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jboss.forge.furnace</groupId>
+                <artifactId>furnace-maven-plugin</artifactId>
+                <version>${version.forge}</version>
+                <executions>
+                    <execution>
+                        <id>deploy-addons</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>addon-install</goal>
+                        </goals>
+                        <inherited>false</inherited>
+                        <configuration>
+                            <addonRepository>${project.build.directory}/addons</addonRepository>
+                            <addonIds>
+                                <addonId>org.jboss.forge.addon:core,${version.forge}</addonId>
+                            </addonIds>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -12,10 +12,12 @@
 
     <modules>
         <module>01-roaster</module>
+        <module>02-furnace</module>
     </modules>
 
     <properties>
         <version.java>1.7</version.java>
+        <version.forge>2.3.0.Final</version.forge>
         <version.roaster>2.0.0.Final</version.roaster>
         <version.bean-validation>1.0.0.GA</version.bean-validation>
         <!--Test-->
@@ -34,6 +36,15 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- Roaster -->
+            <dependency>
+                <groupId>org.jboss.forge</groupId>
+                <artifactId>forge-bom</artifactId>
+                <version>${version.forge}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
             <!-- Roaster -->
             <dependency>
