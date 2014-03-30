@@ -13,6 +13,7 @@
     <modules>
         <module>01-roaster</module>
         <module>02-furnace</module>
+        <module>03-template</module>
     </modules>
 
     <properties>
