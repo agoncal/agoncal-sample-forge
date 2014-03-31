@@ -10,7 +10,6 @@ import org.jboss.forge.furnace.Furnace;
 import org.jboss.forge.furnace.repositories.AddonRepositoryMode;
 import org.jboss.forge.furnace.se.FurnaceFactory;
 
-import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -32,39 +31,32 @@ import java.util.Map;
  */
 public class RestEndpoint {
 
-    @Inject
-    private TemplateProcessorFactory factory;
-
-    @Inject
-    ResourceFactory resourceFactory;
-
+    public static void main(String[] args) throws IOException {
+        new RestEndpoint().doIt();
+    }
 
     private void doIt() throws IOException {
-        Resource<URL> templateResource = resourceFactory.create(getClass().getResource("EndpointWithDTO.jv"));
-        Template template = new FreemarkerTemplate(templateResource); // Mark this resource as a Freemarker template
-        TemplateProcessor processor = factory.fromTemplate(template);
-        Map<String,Object> params = new HashMap<String,Object>(); //Could be a POJO also.
-        params.put("name", "JBoss Forge");
-        String output = processor.process(params); // should return "Hello JBoss Forge".
-        System.out.println(output);
-    }
-
-
-    public static void main(String[] args) throws IOException {
         Furnace furnace = startFurnace();
-        try
-        {
+        try {
 
-            new RestEndpoint().doIt();
-        }
-        finally
-        {
+            ResourceFactory resourceFactory = furnace.getAddonRegistry().getServices(ResourceFactory.class).get();
+            TemplateProcessorFactory factory = furnace.getAddonRegistry().getServices(TemplateProcessorFactory.class).get();
+
+            Resource<URL> templateResource = resourceFactory.create(getClass().getResource("EndpointWithDTO.jv"));
+            Template template = new FreemarkerTemplate(templateResource); // Mark this resource as a Freemarker template
+            TemplateProcessor processor = factory.fromTemplate(template);
+            Map<String, Object> params = new HashMap<String, Object>(); //Could be a POJO also.
+            params.put("name", "JBoss Forge");
+            String output = processor.process(params); // should return "Hello JBoss Forge".
+            System.out.println(output);
+
+        } finally {
             furnace.stop();
         }
+
     }
 
-    static Furnace startFurnace()
-    {
+    static Furnace startFurnace() {
         // Create a Furnace instance. NOTE: This must be called only once
         Furnace furnace = FurnaceFactory.getInstance();
 
@@ -75,14 +67,10 @@ public class RestEndpoint {
         furnace.startAsync();
 
         // Wait until Furnace is started
-        while (!furnace.getStatus().isStarted())
-        {
-            try
-            {
+        while (!furnace.getStatus().isStarted()) {
+            try {
                 Thread.sleep(100);
-            }
-            catch (InterruptedException e)
-            {
+            } catch (InterruptedException e) {
                 break;
             }
         }
