@@ -42,7 +42,7 @@ public class RestEndpoint {
             ResourceFactory resourceFactory = furnace.getAddonRegistry().getServices(ResourceFactory.class).get();
             TemplateProcessorFactory factory = furnace.getAddonRegistry().getServices(TemplateProcessorFactory.class).get();
 
-            Resource<URL> templateResource = resourceFactory.create(getClass().getResource("EndpointWithDTO.jv"));
+            Resource<URL> templateResource = resourceFactory.create(getClass().getResource("RestEndpoint.jv"));
             Template template = new FreemarkerTemplate(templateResource); // Mark this resource as a Freemarker template
             TemplateProcessor processor = factory.fromTemplate(template);
             Map<String, Object> params = new HashMap<String, Object>(); //Could be a POJO also.
