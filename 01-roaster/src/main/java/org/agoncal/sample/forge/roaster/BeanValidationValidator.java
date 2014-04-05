@@ -28,7 +28,7 @@ public class BeanValidationValidator {
         final JavaClassSource javaClass = Roaster.create(JavaClassSource.class);
         javaClass.setName("MaxValidatorForString");
         javaClass.addInterface(ConstraintValidator.class);
-        javaClass.addInterface("ConstraintValidator<Max, Number>");
+//        javaClass.addInterface("ConstraintValidator<Max, Number>");
         javaClass.addMethod().setPublic().setName("initialize").setReturnTypeVoid().setParameters("Max constraint").setBody("").addAnnotation(Override.class);
         javaClass.addMethod().setPublic().setName("isValid").setReturnType("boolean").setParameters("Number value, ConstraintValidatorContext context").setBody("return false;").addAnnotation(Override.class);
         System.out.println(javaClass);

@@ -22,12 +22,11 @@ public class BeanValidationAnnotation {
     public static void main(String[] args) {
 
         // This is the inner annotation List
-        final JavaAnnotationSource listAnnotation = Roaster.create(JavaAnnotationSource.class);
-        listAnnotation.setName("List");
-        listAnnotation.addAnnotation(Retention.class).setEnumValue(RUNTIME);
-        listAnnotation.addAnnotation(Target.class).setEnumValue(METHOD, FIELD, PARAMETER, TYPE);
-        listAnnotation.addAnnotationElement("Email[] value()");
-        System.out.println(listAnnotation);
+        final JavaAnnotationSource listNestedAnnotation = Roaster.create(JavaAnnotationSource.class);
+        listNestedAnnotation.setName("List");
+        listNestedAnnotation.addAnnotation(Retention.class).setEnumValue(RUNTIME);
+        listNestedAnnotation.addAnnotation(Target.class).setEnumValue(METHOD, FIELD, PARAMETER, TYPE);
+        listNestedAnnotation.addAnnotationElement("Email[] value()");
 
         // This is the annotation @Email
         final JavaAnnotationSource emailAnnotation = Roaster.create(JavaAnnotationSource.class);
@@ -40,6 +39,7 @@ public class BeanValidationAnnotation {
         emailAnnotation.addAnnotationElement("String message() default \"wrong email address\"");
         emailAnnotation.addAnnotationElement("Class<?>[] groups() default {}");
         emailAnnotation.addAnnotationElement("Class<? extends Payload>[] payload() default {}");
+        emailAnnotation.addNestedType(listNestedAnnotation);
 
         // I was expecting to have a method like that so I could add annotation inside another one
         // emailAnnotation.addAnnotationElement(emailAnnotation);
@@ -47,5 +47,4 @@ public class BeanValidationAnnotation {
         System.out.println(emailAnnotation);
 
     }
-
 }

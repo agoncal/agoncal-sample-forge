@@ -18,8 +18,8 @@
 
     <properties>
         <version.java>1.7</version.java>
-        <version.forge>2.3.0.Final</version.forge>
-        <version.roaster>2.0.0.Final</version.roaster>
+        <version.forge>2.4.1.Final</version.forge>
+        <version.roaster>2.1.0.Final</version.roaster>
         <version.bean-validation>1.0.0.GA</version.bean-validation>
         <!--Test-->
         <version.junit>4.11</version.junit>
@@ -50,12 +50,12 @@
 
             <!-- Roaster -->
             <dependency>
-                <groupId>org.jboss.forge</groupId>
+                <groupId>org.jboss.forge.roaster</groupId>
                 <artifactId>roaster-api</artifactId>
                 <version>${version.roaster}</version>
             </dependency>
             <dependency>
-                <groupId>org.jboss.forge</groupId>
+                <groupId>org.jboss.forge.roaster</groupId>
                 <artifactId>roaster-jdt</artifactId>
                 <version>${version.roaster}</version>
             </dependency>

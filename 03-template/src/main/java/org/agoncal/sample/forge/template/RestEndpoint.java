@@ -48,7 +48,9 @@ public class RestEndpoint {
             Map<String, Object> params = new HashMap<String, Object>(); //Could be a POJO also.
             params.put("name", "JBoss Forge");
             String output = processor.process(params); // should return "Hello JBoss Forge".
+            System.out.println("######################");
             System.out.println(output);
+            System.out.println("######################");
 
         } finally {
             furnace.stop();
