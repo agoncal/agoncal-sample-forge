@@ -18,25 +18,25 @@ import javax.ws.rs.core.UriBuilder;
  */
 @Stateless
 @Path("${resourcePath}")
-public class ${entityTable}Endpoint
+public class ${entity}Endpoint
 {
-   @PersistenceContext(unitName="${persistenceUnitName}")
+   @PersistenceContext(unitName="${entity}-pu")
    private EntityManager em;
 
    @POST
    @Consumes("${contentType}")
-   public Response create(${dto.getName()} dto)
+   public Response create(${entity} dto)
    {
-      ${entity.getName()} entity = dto.fromDTO(null, em);
+      ${entity} entity = dto.fromDTO(null, em);
       em.persist(entity);
-      return Response.created(UriBuilder.fromResource(${entityTable}Endpoint.class).path(String.valueOf(entity.${getIdStatement})).build()).build();
+      return Response.created(UriBuilder.fromResource(${entity}Endpoint.class).path(String.valueOf(entity.getId())).build()).build();
    }
 
    @DELETE
    @Path("/{id:[0-9][0-9]*}")
-   public Response deleteById(@PathParam("id") ${idType} id)
+   public Response deleteById(@PathParam("id") Long id)
    {
-      ${entity.getName()} entity = em.find(${entity.getName()}.class, id);
+      ${entity} entity = em.find(${entity}.class, id);
       if (entity == null) {
         return Response.status(Status.NOT_FOUND).build();
       }
@@ -47,11 +47,11 @@ public class ${entityTable}Endpoint
    @GET
    @Path("/{id:[0-9][0-9]*}")
    @Produces("${contentType}")
-   public Response findById(@PathParam("id") ${idType} id)
+   public Response findById(@PathParam("id") Long id)
    {
-      TypedQuery<${entity.getName()}> findByIdQuery = em.createQuery("${selectExpression} ${idClause} ${orderClause}", ${entity.getName()}.class);
+      TypedQuery<${entity}> findByIdQuery = em.createQuery("Select entity from ${entity} entity", ${entity}.class);
       findByIdQuery.setParameter("entityId", id);
-      ${entity.getName()} entity;
+      ${entity} entity;
       try {
          entity = findByIdQuery.getSingleResult();
       } catch (NoResultException nre) {
@@ -60,40 +60,18 @@ public class ${entityTable}Endpoint
       if (entity == null) {
         return Response.status(Status.NOT_FOUND).build();
       }
-      ${dto.getName()} dto = new ${dto.getName()}(entity);
+      ${entity} dto = new ${entity}(entity);
       return Response.ok(dto).build();
-   }
-
-   @GET
-   @Produces("${contentType}")
-   public List<${dto.getName()}> listAll(@QueryParam("start") Integer startPosition, @QueryParam("max") Integer maxResult)
-   {
-      TypedQuery<Customer> findAllQuery = em.createQuery("${selectExpression} ${orderClause}", ${entity.getName()}.class);
-      if (startPosition != null)
-      {
-         findAllQuery.setFirstResult(startPosition);
-      }
-      if (maxResult != null)
-      {
-         findAllQuery.setMaxResults(maxResult);
-      }
-      final List<${entity.getName()}> searchResults = findAllQuery.getResultList();
-      final List<${dto.getName()}> results = new ArrayList<${dto.getName()}>();
-      for(${entity.getName()} searchResult: searchResults) {
-        ${dto.getName()} dto = new ${dto.getName()}(searchResult);
-        results.add(dto);
-      }
-      return results;
    }
 
    @PUT
    @Path("/{id:[0-9][0-9]*}")
    @Consumes("${contentType}")
-   public Response update(@PathParam("id") ${idType} id, ${dto.getName()} dto)
+   public Response update(@PathParam("id") Long id, ${entity} dto)
    {
-      TypedQuery<${entity.getName()}> findByIdQuery = em.createQuery("${selectExpression} ${idClause} ${orderClause}", ${entity.getName()}.class);
+      TypedQuery<${entity}> findByIdQuery = em.createQuery("Select entity from ${entity} entity", ${entity}.class);
       findByIdQuery.setParameter("entityId", id);
-      ${entity.getName()} entity;
+      ${entity} entity;
       try {
          entity = findByIdQuery.getSingleResult();
       } catch (NoResultException nre) {

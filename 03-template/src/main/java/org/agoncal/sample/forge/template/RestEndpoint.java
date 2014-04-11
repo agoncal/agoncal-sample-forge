@@ -9,9 +9,15 @@ import org.jboss.forge.addon.templates.freemarker.FreemarkerTemplate;
 import org.jboss.forge.furnace.Furnace;
 import org.jboss.forge.furnace.repositories.AddonRepositoryMode;
 import org.jboss.forge.furnace.se.FurnaceFactory;
+import org.jboss.forge.roaster.Roaster;
+import org.jboss.forge.roaster.model.JavaClass;
+import org.jboss.forge.roaster.model.JavaType;
+import org.jboss.forge.roaster.model.source.JavaClassSource;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
+import java.lang.annotation.Documented;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,14 +49,28 @@ public class RestEndpoint {
             TemplateProcessorFactory factory = furnace.getAddonRegistry().getServices(TemplateProcessorFactory.class).get();
 
             Resource<URL> templateResource = resourceFactory.create(getClass().getResource("RestEndpoint.jv"));
-            Template template = new FreemarkerTemplate(templateResource); // Mark this resource as a Freemarker template
-            TemplateProcessor processor = factory.fromTemplate(template);
-            Map<String, Object> params = new HashMap<String, Object>(); //Could be a POJO also.
-            params.put("name", "JBoss Forge");
-            String output = processor.process(params); // should return "Hello JBoss Forge".
+            TemplateProcessor processor = factory.fromTemplate(templateResource);
+            Map<String, Object> params = new HashMap<>();
+            params.put("resourcePath", "books");
+            params.put("entity", "Book");
+            params.put("contentType", "application/xml");
+
+            String output = processor.process(params);
             System.out.println("######################");
             System.out.println(output);
             System.out.println("######################");
+
+            JavaClassSource source = Roaster.parse(JavaClassSource.class, output);
+
+            source.addInterface(Serializable.class);
+            source.addImport("org.agoncal.myproj.constraints.Email");
+            source.addField().setPrivate().setName("email").setType(String.class).setFinal(true).addAnnotation("Email");
+            source.addMethod().setPublic().setName("doSomething").setReturnTypeVoid().setParameters("String toto").setBody("return null;").addAnnotation(Documented.class);
+
+            System.out.println("----------------------");
+            System.out.println(source);
+            System.out.println("----------------------");
+
 
         } finally {
             furnace.stop();

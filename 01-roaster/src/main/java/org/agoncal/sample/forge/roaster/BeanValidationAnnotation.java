@@ -1,6 +1,7 @@
 package org.agoncal.sample.forge.roaster;
 
 import org.jboss.forge.roaster.Roaster;
+import org.jboss.forge.roaster.model.source.AnnotationElementSource;
 import org.jboss.forge.roaster.model.source.JavaAnnotationSource;
 
 import javax.validation.Constraint;

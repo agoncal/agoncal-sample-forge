@@ -3,6 +3,15 @@
 Several samples about Forge :
 
 * 01-roaster : Examples about the Roaster API
+* 02-furnace : Examples about the Furnace container
+* 03-template : Examples about the using templates in Forge
+
+## Add-ons
+
+Some examples need external addons and need to be installed :
+
+* addon-install --groupId org.jboss.forge.addon --name angularjs --version 2.0.0-SNAPSHOT
+*
 
 # Licensing
 
