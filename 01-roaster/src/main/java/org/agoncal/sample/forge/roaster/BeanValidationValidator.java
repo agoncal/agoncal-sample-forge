@@ -1,20 +1,12 @@
 package org.agoncal.sample.forge.roaster;
 
 import org.jboss.forge.roaster.Roaster;
-import org.jboss.forge.roaster.model.source.JavaAnnotationSource;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
+import org.jboss.forge.roaster.model.source.MethodSource;
 
-import javax.validation.Constraint;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import javax.validation.Payload;
-import java.io.Serializable;
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.validation.constraints.Max;
 
 /**
  * @author Antonio Goncalves
@@ -25,12 +17,23 @@ public class BeanValidationValidator {
 
     public static void main(String[] args) {
 
+        String constraintAnnotation = "Max";
+        String dataType = "Number";
+
         final JavaClassSource javaClass = Roaster.create(JavaClassSource.class);
         javaClass.setName("MaxValidatorForString");
-        javaClass.addInterface(ConstraintValidator.class);
-//        javaClass.addInterface("ConstraintValidator<Max, Number>");
-        javaClass.addMethod().setPublic().setName("initialize").setReturnTypeVoid().setParameters("Max constraint").setBody("").addAnnotation(Override.class);
-        javaClass.addMethod().setPublic().setName("isValid").setReturnType("boolean").setParameters("Number value, ConstraintValidatorContext context").setBody("return false;").addAnnotation(Override.class);
+        javaClass.addImport(ConstraintValidator.class);
+        javaClass.addInterface("ConstraintValidator<" + constraintAnnotation + ", " + dataType + ">");
+
+        MethodSource<?> initializeMethod = javaClass.addMethod().setPublic().setName("initialize").setReturnTypeVoid();
+        initializeMethod.addParameter(Max.class, "constraint");
+        initializeMethod.setBody("").addAnnotation(Override.class);
+
+        MethodSource<?> isValidMethod = javaClass.addMethod().setPublic().setName("isValid").setReturnType(boolean.class);
+        isValidMethod.addParameter(Number.class, "value");
+        isValidMethod.addParameter(ConstraintValidatorContext.class, "context");
+        isValidMethod.setBody("return false;").addAnnotation(Override.class);
+
         System.out.println(javaClass);
     }
 

@@ -29,3 +29,6 @@ http://localhost:8080/quickdemo/rest/quickentities
 as-undeploy
 as-shutdown
 
+cd ~~
+
+

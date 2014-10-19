@@ -1,4 +1,4 @@
-project-new --named devoxxjsf --topLevelPackage org.devoxx.conf --type war --finalName devoxxjsf ;
+project-new --named devoxxangular --topLevelPackage org.devoxx.conf --type war --finalName devoxxangular ;
 
 
 jpa-new-entity --named Speaker ;
@@ -43,12 +43,7 @@ jpa-new-field --named imageURL ;
 jpa-new-field --named pageURL ;
 
 
-scaffold-setup ;
+scaffold-setup --provider AngularJS ;
 scaffold-generate --targets org.devoxx.conf.model.Book ;
 scaffold-generate --targets org.devoxx.conf.model.Speaker ;
 scaffold-generate --targets org.devoxx.conf.model.Talk ;
-
-rest-setup ;
-rest-generate-endpoints-from-entities --targets org.devoxx.conf.model.Book ;
-rest-generate-endpoints-from-entities --targets org.devoxx.conf.model.Speaker ;
-rest-generate-endpoints-from-entities --targets org.devoxx.conf.model.Talk ;

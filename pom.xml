@@ -14,15 +14,18 @@
         <module>01-roaster</module>
         <module>02-furnace</module>
         <module>03-template</module>
-        <module>04-xml</module>
+        <module>04-GenerateFromDB</module>
     </modules>
 
     <properties>
         <version.java>1.7</version.java>
-        <version.forge>2.4.2-SNAPSHOT</version.forge>
-        <version.roaster>2.1.1-SNAPSHOT</version.roaster>
+        <version.forge>2.12.0.Final</version.forge>
+        <version.roaster>2.8.2.Final</version.roaster>
         <version.xml-parser>1.0.1-SNAPSHOT</version.xml-parser>
         <version.bean-validation>1.0.0.GA</version.bean-validation>
+        <version.javaee>7.0</version.javaee>
+        <!--Test-->
+        <version.postgres>9.3-1100-jdbc3</version.postgres>
         <!--Test-->
         <version.junit>4.11</version.junit>
         <!--Maven Plugins-->
@@ -67,13 +70,25 @@
                 <groupId>org.jboss.forge</groupId>
                 <artifactId>xml-parser</artifactId>
                 <version>${version.xml-parser}</version>
-             </dependency>
+            </dependency>
 
             <!-- Java EE -->
             <dependency>
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
                 <version>${version.bean-validation}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>${version.javaee}</version>
+            </dependency>
+
+            <!-- Database -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${version.postgres}</version>
             </dependency>
 
             <!-- Test -->
@@ -90,6 +105,18 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>sql-maven-plugin</artifactId>
+                    <version>1.5</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.postgresql</groupId>
+                            <artifactId>postgresql</artifactId>
+                            <version>${version.postgres}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
