@@ -6,10 +6,12 @@
 
 * Go to the CDI directory : `cd $CDI`
 * Launch Forge : `$SOFTWARE_HOME/Forge/xxx/bin/forge`
+* Create the project `cditalk`
 
-`project-new --named cditalk`
 
-Show the project on Intellij IDEA : `pom.xml` and empty Maven directory structure.
+    project-new --named cditalk
+
+* Show the project on Intellij IDEA : `pom.xml` and empty Maven directory structure.
 
 #### Create an entity
 
@@ -19,13 +21,13 @@ Show the project on Intellij IDEA : `pom.xml` and empty Maven directory structur
     jpa-new-field --named price --type java.lang.Float ;
     jpa-new-field --named discount --type java.lang.Float ;
 
-Show the entity (generated id, version...), Hibernate dependency in the `pom.xml` and `persistence.xml`.
+* Show the entity (generated id, version...), Hibernate dependency in the `pom.xml` and `persistence.xml`.
 
 #### Generate JSF pages for the entity
 
 `scaffold-generate --targets org.cditalk.model.Book`
 
-Show the JSF backing bean `BookBean` and the `webapp/book` directory with all the web pages.
+* Show the JSF backing bean `BookBean` and the `webapp/book` directory with all the web pages.
 
 #### In Intellij, deploy and run the app on JBoss
 
@@ -40,7 +42,7 @@ Show the JSF backing bean `BookBean` and the `webapp/book` directory with all th
 
 * Interface should `extends Serializable`
 * Add the method `String generateNumber()` to the interface
-* `IsbnGenerator` should implement `implements NumberGenerator` it with `return "13-" + Math.random();`
+* `IsbnGenerator` should implement it (`implements NumberGenerator`) and method should `return "13-" + Math.random();`
 
 #### Inject IsbnGenerator in the BookBean
 
@@ -57,7 +59,7 @@ Show the JSF backing bean `BookBean` and the `webapp/book` directory with all th
  
     java-new-class --named IssnGenerator --targetPackage org.cditalk.util ;
 
-* `IsbnGenerator` should implement `implements NumberGenerator` it with `return "8-" + Math.random();`
+* `IsbnGenerator` should `implements NumberGenerator`  and method should `return "8-" + Math.random();`
 
 #### Redeploy the app and show it doesn't deploy
 

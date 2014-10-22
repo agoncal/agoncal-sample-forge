@@ -32,10 +32,6 @@ java-new-class --named InventoryService --targetPackage org.cditalk.service ;
 #  Creates utility classes  #
 #  #######################  #
 
-#  Logging Producer
-#  ############
-java-new-bean --named LoggingProducer --targetPackage org.cditalk.util ;
-
 #  Number generators interface and qualifier
 #  ############
 java-new-interface --named NumberGenerator --targetPackage org.cditalk.util ;
