@@ -31,9 +31,8 @@
 
 #### In Intellij, deploy and run the app on JBoss
 
-[http://localhost:8080/book]
-
-*I've created a Java EE application in 2 minutes, and that's because I was talking*
+* Got to [http://localhost:8080/book]()
+* *I've created a Java EE application in 2 minutes, and that's because I was talking*
 
 #### Create the ISBN NumberGenerator
  
@@ -91,15 +90,18 @@
 
 #### Produce and Inject the Entity Manager (FIELD)
 
-* Show `@PersistenceContext in `BookBean`
+* Show `@PersistenceContext` in `BookBean`
 * Create the `ResourceProducer` class
 
 
     java-new-class --named ResourceProducer --targetPackage org.cditalk.util
 
 * `ResourceProducer` should implement `Serializable` 
-* In `ResourceProducer` copy the `@PersistenceContext` from `BookBean` and produce it with `@Produces` 
+* In `ResourceProducer` copy the `@PersistenceContext` from `BookBean`  
 * In `BookBean` inject the EntityManager with `@Inject`      
+* Deploy the app and check that there is a unsatisfied dependency error
+* In `ResourceProducer` produce the `EntityManager` with `@Produces`
+* Deploy the app and check it's working
     
 #### Produce and Inject the Logger (METHOD)
 
