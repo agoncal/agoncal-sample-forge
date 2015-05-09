@@ -14,13 +14,12 @@
         <module>01-roaster</module>
         <module>02-furnace</module>
         <module>03-template</module>
-        <module>04-GenerateFromDB</module>
     </modules>
 
     <properties>
         <version.java>1.7</version.java>
         <version.forge>2.12.2.Final</version.forge>
-        <version.roaster>2.9.0.Final</version.roaster>
+        <version.roaster>2.13.0.Final</version.roaster>
         <version.xml-parser>1.0.1-SNAPSHOT</version.xml-parser>
         <version.bean-validation>1.0.0.GA</version.bean-validation>
         <version.javaee>7.0</version.javaee>
