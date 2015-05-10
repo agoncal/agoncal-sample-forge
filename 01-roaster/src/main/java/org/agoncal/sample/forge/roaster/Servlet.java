@@ -20,10 +20,11 @@ public class Servlet
 
    public static void main(String[] args)
    {
+       String[] urlPatterns = {"myServlet", "myPattern2"};
 
       final JavaClassSource javaClassSource = Roaster.create(JavaClassSource.class);
       javaClassSource.setPackage("org.agoncal.myproj").setName("MyServlet").setSuperType(HttpServlet.class)
-               .addAnnotation(WebServlet.class).setStringValue("urlPatterns", "myServlet");
+               .addAnnotation(WebServlet.class).setStringArrayValue("urlPatterns", urlPatterns);
 
       createMethod(javaClassSource, "doPut");
       createMethod(javaClassSource, "doGet");
