@@ -35,14 +35,14 @@ public class RESTEndpoint {
 				case POST:
 					javaClassSource.addImport(UriBuilder.class);
 					doGet.addAnnotation(javax.ws.rs.Consumes.class).setStringArrayValue(
-							new String[] {MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON});
+							new String[] {MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON});
 					doGet.addParameter(String.class, "entity");
 					doGet.setBody("return Response.created(UriBuilder.fromResource(" + named + ".class).build()).build();");
 					break;
 				case PUT:
 					javaClassSource.addImport(UriBuilder.class);
 					doGet.addAnnotation(javax.ws.rs.Consumes.class).setStringArrayValue(
-							new String[] {MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON});
+							new String[] {MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON});
 					doGet.addParameter(String.class, "entity");
 					doGet.setBody("return Response.created(UriBuilder.fromResource(" + named + ".class).build()).build();");
 					break;
