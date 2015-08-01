@@ -19,7 +19,7 @@
     <properties>
         <version.java>1.7</version.java>
         <version.forge>2.12.2.Final</version.forge>
-        <version.roaster>2.13.2.Final</version.roaster>
+        <version.roaster>2.15.0.Final</version.roaster>
         <version.xml-parser>1.0.1-SNAPSHOT</version.xml-parser>
         <version.bean-validation>1.0.0.GA</version.bean-validation>
         <version.javaee>7.0</version.javaee>
