@@ -21,7 +21,7 @@ public class FacesMyValidator
    {
 
       final JavaClassSource javaClass = Roaster.create(JavaClassSource.class);
-      javaClass.setPackage("org.agoncal.myproj").setName("MyJSFValidator2").addInterface(Validator.class);
+      javaClass.setPackage("org.agoncal.myproj").setName("MyJSFValidator3").addInterface(Validator.class);
       javaClass.addImport(FacesMessage.class);
       javaClass.addAnnotation(FacesValidator.class).setStringValue("org.agoncal.myproj" + "." + "MyJSFValidator2");
 
